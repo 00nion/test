@@ -5,7 +5,12 @@ import crypto from "crypto"
 
 // This is your full Roblox script that will be served via loadstring
 const ROBLOX_SCRIPT = `
+local v1 = "hi"
 
+while true do
+print (v1)
+wait(0)
+end
 `
 
 // In-memory token storage (for demonstration purposes only)
@@ -76,11 +81,10 @@ loadstring(decompressed)()
     // Return an error message for unauthorized requests
     return NextResponse.json(
       {
-        message: "Unauthorized access. This script is only available through Roblox.",
+        version: "v0.1",
+        message: "skidding is no gud >:((",
         status: "unauthorized",
-        timestamp: new Date().toISOString(),
         token: sessionToken,
-        version: "full",
       },
       {
         status: 403,
@@ -92,4 +96,3 @@ loadstring(decompressed)()
     )
   }
 }
-
