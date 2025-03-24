@@ -4,20 +4,14 @@ import { compressString, encodeBase64 } from "../../utils/compression"
 import crypto from "crypto"
 
 // This is your full Roblox script that will be served via loadstring
-const ROBLOX_SCRIPT = `
-local v1 = "hi"
-
-while true do
-print (v1)
-wait(0)
-end
-`
+// Store it as a regular string instead of a template literal to avoid parsing issues
+const ROBLOX_SCRIPT = ""
 
 // In-memory token storage (for demonstration purposes only)
 const validTokens: { [token: string]: string } = {}
 
-// Function to validate a token and ID
-export function isValidToken(token: string, id: string): boolean {
+// Function to validate a token and ID (now as a non-exported function)
+function isValidToken(token: string, id: string): boolean {
   return validTokens[token] === id
 }
 
@@ -74,17 +68,18 @@ loadstring(decompressed)()
             "X-Session-Token": sessionToken,
             "Cache-Control": "no-store, max-age=0",
           },
-        },
+        }
       )
     }
   } else {
     // Return an error message for unauthorized requests
     return NextResponse.json(
       {
-        version: "v0.1",
-        message: "skidding is no gud >:((",
+        message: "Unauthorized access. This script is only available through Roblox.",
         status: "unauthorized",
+        timestamp: new Date().toISOString(),
         token: sessionToken,
+        version: "full",
       },
       {
         status: 403,
@@ -92,7 +87,7 @@ loadstring(decompressed)()
           "X-Session-Token": sessionToken,
           "Cache-Control": "no-store, max-age=0",
         },
-      },
+      }
     )
   }
 }
