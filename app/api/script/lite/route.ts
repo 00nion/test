@@ -3,29 +3,8 @@ import { isRobloxRequest } from "../../utils/security"
 import crypto from "crypto"
 
 // This is your lite version Roblox script
-const LITE_ROBLOX_SCRIPT = `
--- Lite version of the script with minimal features
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-
-print("Lite script loaded successfully!")
-
--- Basic notification
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Lite Version",
-    Text = "Lite version loaded successfully!",
-    Duration = 3
-})
-
--- Basic functionality only
-local function setupBasicFeatures()
-    print("Setting up basic features...")
-    -- Add your basic functionality here
-end
-
-setupBasicFeatures()
-`
+// Store it as a regular string instead of a template literal to avoid parsing issues
+const LITE_ROBLOX_SCRIPT = "-- Lite version of the script with minimal features\nlocal Players = game:GetService(\"Players\")\nlocal LocalPlayer = Players.LocalPlayer\nlocal Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()\n\nprint(\"Lite script loaded successfully!\")\n\n-- Basic notification\ngame:GetService(\"StarterGui\"):SetCore(\"SendNotification\", {\n  Title = \"Lite Version\",\n  Text = \"Lite version loaded successfully!\",\n  Duration = 3\n})\n\n-- Basic functionality only\nlocal function setupBasicFeatures()\n  print(\"Setting up basic features...\")\n  -- Add your basic functionality here\nend\n\nsetupBasicFeatures()"
 
 export async function GET(request: NextRequest) {
   // Generate a random session token for this request (just for tracking)
@@ -62,7 +41,7 @@ export async function GET(request: NextRequest) {
             "X-Session-Token": sessionToken,
             "Cache-Control": "no-store, max-age=0",
           },
-        },
+        }
       )
     }
   } else {
@@ -81,7 +60,7 @@ export async function GET(request: NextRequest) {
           "X-Session-Token": sessionToken,
           "Cache-Control": "no-store, max-age=0",
         },
-      },
+      }
     )
   }
 }
