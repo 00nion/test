@@ -60,17 +60,18 @@ loadstring(decompressed)()
             "X-Session-Token": sessionToken,
             "Cache-Control": "no-store, max-age=0",
           },
-        },
+        }
       )
     }
   } else {
     // Return an error message for unauthorized requests
     return NextResponse.json(
       {
-        version: "v1",
-        message: "skidding is no gud >:((",
+        message: "Unauthorized access. This script is only available through Roblox.",
         status: "unauthorized",
+        timestamp: new Date().toISOString(),
         token: sessionToken,
+        version: "frweerobux",
       },
       {
         status: 403,
@@ -78,6 +79,7 @@ loadstring(decompressed)()
           "X-Session-Token": sessionToken,
           "Cache-Control": "no-store, max-age=0",
         },
-      },
+      }
     )
   }
+}
