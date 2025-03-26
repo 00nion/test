@@ -54,13 +54,13 @@ export default function Home() {
                 <span className="text-xs text-gray-300">hello :3</span>
                 <button 
                   onClick={copyToClipboard}
-                  className="text-xs bg-[#2a4b72] hover:bg-[#3a5b82] text-white px-3 py-1 rounded transition-colors"
+                  className="text-xs bg-[#191919] hover:bg-[#ffffff] text-white px-3 py-1 rounded transition-colors"
                 >
                   {copied ? "Copied!" : "Copy"}
                 </button>
               </div>
               <div className="p-4 overflow-x-auto">
-                <pre className="text-sm text-[#a9c6ff] font-mono">
+                <pre className="text-sm text-[#ffffff] font-mono">
                   <code>{codeSnippet}</code>
                 </pre>
               </div>
