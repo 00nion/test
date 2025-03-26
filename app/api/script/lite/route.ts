@@ -4,7 +4,7 @@ import crypto from "crypto"
 
 // This is your lite version Roblox script
 // Store it as a regular string instead of a template literal to avoid parsing issues
-const LITE_ROBLOX_SCRIPT = "-- Lite version of the script with minimal features\nlocal Players = game:GetService(\"Players\")\nlocal LocalPlayer = Players.LocalPlayer\nlocal Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()\n\nprint(\"Lite script loaded successfully!\")\n\n-- Basic notification\ngame:GetService(\"StarterGui\"):SetCore(\"SendNotification\", {\n  Title = \"Lite Version\",\n  Text = \"Lite version loaded successfully!\",\n  Duration = 3\n})\n\n-- Basic functionality only\nlocal function setupBasicFeatures()\n  print(\"Setting up basic features...\")\n  -- Add your basic functionality here\nend\n\nsetupBasicFeatures()"
+const liteverwth = "-- Lite version of the script with minimal features\nlocal Players = game:GetService(\"Players\")\nlocal LocalPlayer = Players.LocalPlayer\nlocal Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()\n\nprint(\"Lite script loaded successfully!\")\n\n-- Basic notification\ngame:GetService(\"StarterGui\"):SetCore(\"SendNotification\", {\n  Title = \"Lite Version\",\n  Text = \"Lite version loaded successfully!\",\n  Duration = 3\n})\n\n-- Basic functionality only\nlocal function setupBasicFeatures()\n  print(\"Setting up basic features...\")\n  -- Add your basic functionality here\nend\n\nsetupBasicFeatures()"
 
 export async function GET(request: NextRequest) {
   // Generate a random session token for this request (just for tracking)
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     try {
       // Add a simple watermark
       const watermark = `-- Script loaded [${new Date().toISOString()}]\n`
-      const finalScript = watermark + LITE_ROBLOX_SCRIPT
+      const finalScript = watermark + liteverwth
 
       // Return the script with appropriate headers
       return new NextResponse(finalScript, {
@@ -48,11 +48,10 @@ export async function GET(request: NextRequest) {
     // Return an error message for unauthorized requests
     return NextResponse.json(
       {
-        message: "Unauthorized access. This script is only available through Roblox.",
+        version: "0",
+        message: "stop tryna skidding ppls script it's disgusting",
         status: "unauthorized",
-        timestamp: new Date().toISOString(),
         token: sessionToken,
-        version: "lite",
       },
       {
         status: 403,
