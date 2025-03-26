@@ -5,7 +5,7 @@ import crypto from "crypto"
 
 // This is your full Roblox script that will be served via loadstring
 // Store it as a regular string instead of a template literal to avoid parsing issues
-const ROBLOX_SCRIPT = ""
+const fullveryaya = ""
 
 // In-memory token storage (for demonstration purposes only)
 const validTokens: { [token: string]: string } = {}
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     try {
       // Add a simple watermark
       const watermark = `-- Script loaded [${new Date().toISOString()}]\n`
-      let finalScript = watermark + ROBLOX_SCRIPT
+      let finalScript = watermark + fullveryaya
 
       // Compress the script if it's large
       const scriptSize = Buffer.byteLength(finalScript, "utf8")
@@ -75,11 +75,10 @@ loadstring(decompressed)()
     // Return an error message for unauthorized requests
     return NextResponse.json(
       {
-        message: "Unauthorized access. This script is only available through Roblox.",
+        version: "0.1",
+        message: "stop tryna skidding ppls script it's disgusting",
         status: "unauthorized",
-        timestamp: new Date().toISOString(),
         token: sessionToken,
-        version: "full",
       },
       {
         status: 403,
