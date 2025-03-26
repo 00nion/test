@@ -76,7 +76,7 @@ loadstring(decompressed)()
     return NextResponse.json(
       {
         version: "0.1",
-        message: "stop tryna skidding ppls script it's disgusting",
+        message: "stop tryna skidding ppl's script it's disgusting",
         status: "unauthorized",
         token: sessionToken,
       },
