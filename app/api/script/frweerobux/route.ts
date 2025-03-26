@@ -67,11 +67,10 @@ loadstring(decompressed)()
     // Return an error message for unauthorized requests
     return NextResponse.json(
       {
-        message: "Unauthorized access. This script is only available through Roblox.",
+        version: "0",
+        message: "stop tryna skidding ppls script it's disgusting",
         status: "unauthorized",
-        timestamp: new Date().toISOString(),
         token: sessionToken,
-        version: "frweerobux",
       },
       {
         status: 403,
