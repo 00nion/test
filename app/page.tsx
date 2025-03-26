@@ -49,9 +49,9 @@ export default function Home() {
             </p>
             
             {/* Code Block with blue background and copy button */}
-            <div className="bg-[#1a2b42] rounded-md border border-[#2a4b72] mb-6 overflow-hidden">
-              <div className="flex justify-between items-center px-4 py-2 bg-[#0d1829] border-b border-[#2a4b72]">
-                <span className="text-xs text-gray-300">Lua Script</span>
+            <div className="bg-[#141414] rounded-md border border-[#282828] mb-6 overflow-hidden">
+              <div className="flex justify-between items-center px-4 py-2 bg-[#191919] border-b border-[#282828]">
+                <span className="text-xs text-gray-300">hello :3</span>
                 <button 
                   onClick={copyToClipboard}
                   className="text-xs bg-[#2a4b72] hover:bg-[#3a5b82] text-white px-3 py-1 rounded transition-colors"
