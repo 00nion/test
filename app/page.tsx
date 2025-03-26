@@ -1,58 +1,54 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-
 export default function Home() {
   const randomMessages = [
-    "it's just a loader, nothing special..",
-    "trời ơi chỉ là cái loader thôi mà ;-;",
-    "fun fact: im an onion (riel!!1!1)",
-    "script on scriptblox and rscripts",
-    "hi, lol",
-    "erm stop looking..",
-    "rjvwkdsbshsbenajsh",
-    "nice try. :3",
-    ":33",
-    "hey baba gril, will u date mi ><",
-    "out of idea.. yay!",
-  ]
-
-  const [randomMessage, setRandomMessage] = useState("")
-
-  useEffect(() => {
-    // Select a random message when the component mounts
-    const randomIndex = Math.floor(Math.random() * randomMessages.length)
-    setRandomMessage(randomMessages[randomIndex])
-
-    // Prevent scrolling on the body
-    document.body.style.overflow = "hidden"
-
-    return () => {
-      // Cleanup: restore scrolling when component unmounts
-      document.body.style.overflow = ""
-    }
-  }, [])
-
+    "helo",
+    "hmm, idk",
+    "me is sigma",
+    "uhh...",
+    "idk what to say tbh",
+    "erm this kinda.. idk what to say"
+  ];
+  
+  // Get a random message
+  const randomMessage = randomMessages[Math.floor(Math.random() * randomMessages.length)];
+  
   return (
-    <div className="h-[100dvh] w-screen flex items-center justify-center bg-black relative overflow-hidden">
-      {/* Glow effect under the background */}
-      <div className="absolute w-[min(500px,80vw)] h-[min(500px,80vh)] rounded-full bg-[rgb(72,138,182)] opacity-20 blur-[100px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0"></div>
-
-      <Card className="w-[min(90vw,400px)] bg-black/80 border-gray-800 relative z-10">
-        <CardContent className="p-[min(8vw,2rem)] text-center">
-          <h1 className="text-[min(8vw,2.5rem)] font-extrabold text-white mb-[min(4vw,1.5rem)] tracking-tight">
-            Coming Soon
-          </h1>
-          <p className="text-gray-400 mb-[min(6vw,2rem)] text-[min(4vw,1rem)]">
-            Web coming soon. Loader still work btw!! idk..
-          </p>
-          <p className="text-[rgb(72,138,182)] text-[min(3.5vw,0.875rem)] italic opacity-70 mt-[min(6vw,2rem)]">
-            {randomMessage}
-          </p>
-        </CardContent>
-      </Card>
+    <div className="min-h-screen flex items-center justify-center bg-[#1a1a1a] font-['Roboto',sans-serif] relative overflow-hidden">
+      {/* Animated glow */}
+      <div className="absolute w-[500px] h-[500px] rounded-full bg-[rgb(72,138,182)] opacity-20 blur-[100px] animate-pulse-slow"></div>
+      
+      {/* Main content card */}
+      <div className="relative z-10 max-w-md w-full mx-4">
+        <div 
+          className="rounded-xl border border-[rgb(60,60,60)] bg-[rgba(30,30,30,0.65)] backdrop-blur-sm p-8 relative overflow-hidden"
+          style={{
+            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
+          }}
+        >
+          {/* Noise overlay */}
+          <div className="absolute inset-0 bg-noise opacity-[0.94] mix-blend-soft-light"></div>
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <h1 className="text-2xl font-bold text-white mb-4">Roblox Script API</h1>
+            
+            <p className="text-gray-300 mb-6">
+              This service provides script execution for Roblox via loadstring.
+              There is no public web interface available for regular users.
+            </p>
+            
+            {/* Code Block */}
+            <div className="bg-[#1a1a1a] rounded-md p-4 mb-6 overflow-x-auto">
+              <pre className="text-sm text-gray-300 font-mono">
+                <code>{`loadstring(game:HttpGet("https://alternativelol.vercel.app/api/script/full"))()`}</code>
+              </pre>
+            </div>
+            
+            <p className="text-sm text-[rgb(72,138,182)] italic">
+              {randomMessage}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
-
