@@ -65,11 +65,10 @@ export default function Home() {
           
           {/* Content */}
           <div className="relative z-10">
-            <h1 className="text-2xl font-bold text-white mb-4">Roblox Script API</h1>
+            <h1 className="text-2xl font-bold text-white mb-4">web not availible</h1>
             
             <p className="text-gray-300 mb-6">
-              This service provides script execution for Roblox via loadstring.
-              There is no public web interface available for regular users.
+              loadstring work btw im js lazy to make the web interface lol.. (pls forgive me im js too lazy ;-;)
             </p>
             
             {/* Version Selector Dropdown */}
