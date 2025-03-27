@@ -3,8 +3,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = {
-  title: "Coming Soon",
-  description: "Web coming soon. Loader still work btw!! idk..",
+  title: "alternative",
+  description: "hi",
   viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
     generator: 'v0.dev'
 }
