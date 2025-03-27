@@ -64,7 +64,7 @@ export default function Home() {
           className="rounded-xl border border-[rgb(60,60,60)] hover:border-[rgb(72,138,182)] bg-[rgba(30,30,30,0.65)] backdrop-blur-sm p-8 relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(72,138,182,0.3)]"
         >
           {/* Noise overlay with adjusted transparency */}
-          <div className="absolute inset-0 bg-noise opacity-[0.94] mix-blend-soft-light"></div>
+          <div className="absolute inset-0 bg-noise opacity-[0.16] mix-blend-soft-light"></div>
           
           {/* Content */}
           <div className="relative z-10">
