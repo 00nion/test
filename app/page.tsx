@@ -1,18 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const [scriptVersion, setScriptVersion] = useState('full');
-  
-  // Prevent scrolling but allow pull-to-refresh
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
   
   const randomMessages = [
     "hai :3",
@@ -38,7 +30,7 @@ export default function Home() {
   const randomMessage = randomMessages[Math.floor(Math.random() * randomMessages.length)];
   
   const getCodeSnippet = () => {
-    return `loadstring(game:HttpGet("https://your-domain.vercel.app/api/script/${scriptVersion}"))()`;
+    return `loadstring(game:HttpGet("https://altlol.vercel.app/api/script/${scriptVersion}"))()`;
   };
 
   const copyToClipboard = () => {
@@ -48,44 +40,40 @@ export default function Home() {
   };
   
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-[#0f0f0f] font-['Roboto',sans-serif] overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f] font-['Roboto',sans-serif] overflow-auto scrollbar-hide">
       {/* Animated glow */}
       <div className="fixed w-[500px] h-[500px] rounded-full bg-[rgb(72,138,182)] opacity-20 blur-[100px] animate-pulse-slow"></div>
       
       {/* Main content card - fixed width */}
-      <div className="relative z-10 w-[500px] max-w-[90vw]">
+      <div className="relative z-10 w-[500px] max-w-[90vw] my-10">
         <div 
-          className="rounded-xl border border-[rgb(60,60,60)] bg-[rgba(30,30,30,0.65)] backdrop-blur-sm p-8 relative overflow-hidden"
-          style={{
-            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
-          }}
+          className="rounded-xl border border-[rgb(60,60,60)] hover:border-[rgb(72,138,182)] bg-[rgba(30,30,30,0.65)] backdrop-blur-sm p-8 relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(72,138,182,0.3)]"
         >
           {/* Noise overlay with adjusted transparency */}
-          <div className="absolute inset-0 bg-noise opacity-[0.85] mix-blend-soft-light"></div>
+          <div className="absolute inset-0 bg-noise opacity-[0.9] mix-blend-soft-light"></div>
           
           {/* Content */}
           <div className="relative z-10">
             <h1 className="text-2xl font-bold text-white mb-4">web not availible</h1>
             
             <p className="text-gray-300 mb-6">
-              loadstring work btw im js lazy to make the web interface lol.. (pls forgive me im js too lazy ;-;)
+              web on for loadstring only. planning on adding web interface soon? (if web down temporary then use github loadsting <33)
             </p>
             
             {/* Version Selector Dropdown */}
             <div className="mb-4">
               <label htmlFor="version-select" className="block text-sm font-medium text-gray-400 mb-2">
-                Script Version
+                script ver
               </label>
               <div className="relative">
                 <select
                   id="version-select"
                   value={scriptVersion}
                   onChange={(e) => setScriptVersion(e.target.value)}
-                  className="block w-full bg-[#18191c] border border-[#2b2d31] rounded-md py-2 pl-3 pr-10 text-white appearance-none focus:outline-none focus:ring-1 focus:ring-[#5865f2] focus:border-[#5865f2]"
+                  className="block w-full bg-[#18191c] border border-[#2b2d31] hover:border-[rgb(72,138,182)] rounded-md py-2 pl-3 pr-10 text-white appearance-none focus:outline-none focus:ring-1 focus:ring-[rgb(72,138,182)] focus:border-[rgb(72,138,182)] transition-colors"
                 >
-                  <option value="full">Full Version</option>
-                  <option value="lite">Lite Version</option>
-                  <option value="frweerobux">Free Robux</option>
+                  <option value="full">full</option>
+                  <option value="lite">lite</option>
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -96,8 +84,8 @@ export default function Home() {
             </div>
             
             {/* Discord-style Code Block */}
-            <div className="bg-[#18191c] rounded-md mb-6 overflow-hidden relative">
-              <pre className="text-sm font-mono p-4 overflow-x-auto">
+            <div className="bg-[#18191c] rounded-md mb-6 overflow-hidden relative hover:shadow-[0_0_10px_rgba(72,138,182,0.2)] transition-shadow duration-300">
+              <pre className="text-sm font-mono p-4 overflow-x-auto scrollbar-hide">
                 <code>
                   <span className="text-[#f47067]">loadstring</span>
                   <span className="text-white">(</span>
@@ -105,7 +93,7 @@ export default function Home() {
                   <span className="text-white">:</span>
                   <span className="text-[#6cb6ff]">HttpGet</span>
                   <span className="text-white">(</span>
-                  <span className="text-[#96d0ff]">{`"https://your-domain.vercel.app/api/script/${scriptVersion}"`}</span>
+                  <span className="text-[#96d0ff]">{`"https://alt-lol.vercel.app/api/script/${scriptVersion}"`}</span>
                   <span className="text-white">)</span>
                   <span className="text-white">)</span>
                   <span className="text-white">()</span>
@@ -113,8 +101,8 @@ export default function Home() {
               </pre>
               <button 
                 onClick={copyToClipboard}
-                className="absolute top-3 right-3 text-gray-400 hover:text-white bg-[#2b2d31] hover:bg-[#3a3c42] p-1.5 rounded transition-colors"
-                aria-label="Copy code"
+                className="absolute top-3 right-3 text-gray-400 hover:text-white bg-[rgba(43,45,49,0.7)] hover:bg-[rgba(72,138,182,0.3)] backdrop-blur-sm p-1.5 rounded transition-all duration-200"
+                aria-label="copy"
               >
                 {copied ? (
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
