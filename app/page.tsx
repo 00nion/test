@@ -1,17 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react';
-import hljs from 'highlight.js/lib/core';
-import lua from 'highlight.js/lib/languages/lua';
-import 'highlight.js/styles/atom-one-dark.css'; // You can choose different themes
-
-// Register Lua language
-hljs.registerLanguage('lua', lua);
+import { useState } from 'react';
+import { CodeBlock } from '@/components/code-block';
 
 export default function Home() {
-  const [copied, setCopied] = useState(false);
   const [scriptVersion, setScriptVersion] = useState('full');
-  const [highlightedCode, setHighlightedCode] = useState('');
   
   const randomMessages = [
     "hai :3",
@@ -39,19 +32,6 @@ export default function Home() {
   const getCodeSnippet = () => {
     return `loadstring(game:HttpGet("https://alt-lol.vercel.app/api/script/${scriptVersion}"))()`;
   };
-
-  // Update highlighted code when script version changes
-  useEffect(() => {
-    const code = getCodeSnippet();
-    const highlighted = hljs.highlight(code, { language: 'lua' }).value;
-    setHighlightedCode(highlighted);
-  }, [scriptVersion]);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(getCodeSnippet());
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
   
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f] font-['Roboto',sans-serif] overflow-auto scrollbar-hide">
@@ -64,14 +44,14 @@ export default function Home() {
           className="rounded-xl border border-[rgb(60,60,60)] hover:border-[rgb(72,138,182)] bg-[rgba(30,30,30,0.65)] backdrop-blur-sm p-8 relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(72,138,182,0.3)]"
         >
           {/* Noise overlay with adjusted transparency */}
-          <div className="absolute inset-0 bg-noise opacity-[0.1] mix-blend-soft-light"></div>
+          <div className="absolute inset-0 bg-noise opacity-[0.9] mix-blend-soft-light"></div>
           
           {/* Content */}
           <div className="relative z-10">
             <h1 className="text-2xl font-bold text-white mb-4">web not availible</h1>
             
             <p className="text-gray-300 mb-6">
-              web on for loadstring only. planning on adding web interface soon? (if web down temporary then use github loadstring ;33)
+              web on for loadstring only. planning on adding web interface soon? (if web down temporary then use github loadsting &lt;33)
             </p>
             
             {/* Version Selector Dropdown */}
@@ -97,31 +77,12 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Discord-style Code Block with highlight.js */}
-            <div className="bg-[#18191c] rounded-md mb-6 overflow-hidden relative hover:shadow-[0_0_10px_rgba(72,138,182,0.2)] transition-shadow duration-300">
-              <pre className="text-sm font-mono p-4 overflow-x-auto scrollbar-hide">
-                <code 
-                  className="hljs language-lua" 
-                  dangerouslySetInnerHTML={{ __html: highlightedCode }}
-                ></code>
-              </pre>
-              <button 
-                onClick={copyToClipboard}
-                className="absolute top-3 right-3 text-gray-400 hover:text-white bg-[rgba(43,45,49,0.7)] hover:bg-[rgba(72,138,182,0.3)] backdrop-blur-sm p-1.5 rounded transition-all duration-200"
-                aria-label="copy"
-              >
-                {copied ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                )}
-              </button>
-            </div>
+            {/* Code Block using the new component */}
+            <CodeBlock 
+              code={getCodeSnippet()} 
+              language="lua" 
+              className="mb-6"
+            />
             
             <p className="text-sm text-[rgb(72,138,182)] italic">
               {randomMessage}
