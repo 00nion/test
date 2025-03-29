@@ -1,57 +1,56 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Check, Copy } from 'lucide-react'
-import hljs from 'highlight.js/lib/core'
-import lua from 'highlight.js/lib/languages/lua'
-import 'highlight.js/styles/github-dark.css' // GitHub-like dark theme
-
-// Register Lua language
-hljs.registerLanguage('lua', lua)
+import { useRef, useState } from "react"
+import hljs from "highlight.js"
+import "highlight.js/styles/atom-one-dark.css"
+import { Copy, Check } from "lucide-react"
 
 interface CodeBlockProps {
   code: string
   language?: string
-  showLineNumbers?: boolean
   className?: string
 }
 
-export function CodeBlock({ code, language = "lua", showLineNumbers = false, className = "" }: CodeBlockProps) {
+export function CodeBlock({ code, language = "lua", className = "" }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
-  const [highlightedCode, setHighlightedCode] = useState('')
+  const codeRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    // Highlight the code when it changes
-    const highlighted = hljs.highlight(code, { language }).value
-    setHighlightedCode(highlighted)
-  }, [code, language])
+  // Highlight the code
+  const highlightedCode = hljs.highlight(code, { language }).value
 
-  const copyCode = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const copyToClipboard = async () => {
+    if (codeRef.current) {
+      try {
+        await navigator.clipboard.writeText(code)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (err) {
+        console.error("Failed to copy text: ", err)
+      }
+    }
   }
 
   return (
-    <div className={`relative group ${className}`}>
-      <div className="overflow-x-auto rounded-lg bg-zinc-900/80 backdrop-blur-sm border border-zinc-800/60 shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:border-zinc-700/60">
-        <pre className="p-4 text-sm font-mono scrollbar-hide">
-          <code 
-            className={`language-${language}`}
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          ></code>
-        </pre>
+    <div className={`relative rounded-md overflow-hidden ${className}`}>
+      <div className="flex items-center justify-between px-4 py-2 bg-[#18191c] border-b border-[#2b2d31]">
+        <span className="text-sm text-gray-400">{language}</span>
       </div>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute top-2 right-2 text-zinc-400 hover:text-white bg-transparent opacity-0 group-hover:opacity-100 hover:bg-zinc-800/70 focus:bg-zinc-800/70 transition-all duration-200"
-        onClick={copyCode}
-      >
-        {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
-        <span className="sr-only">Copy code</span>
-      </Button>
+      <div className="relative">
+        <pre className="bg-[#18191c] p-4 overflow-x-auto max-h-[120px]">
+          <code
+            ref={codeRef}
+            className={`language-${language} text-sm`}
+            dangerouslySetInnerHTML={{ __html: highlightedCode }}
+          />
+        </pre>
+        <button
+          onClick={copyToClipboard}
+          className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-md bg-[#2b2d31] bg-opacity-70 text-gray-400 hover:text-white transition-colors"
+          aria-label="Copy code"
+        >
+          {copied ? <Check size={16} /> : <Copy size={16} />}
+        </button>
+      </div>
     </div>
   )
 }
