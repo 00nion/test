@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { CodeBlock } from "@/components/code-block"
 import { ChevronDown } from "lucide-react"
 
@@ -8,6 +8,7 @@ export default function Home() {
   const [scriptVersion, setScriptVersion] = useState("full")
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [randomMessage, setRandomMessage] = useState("")
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const randomMessages = [
     "hai :3",
@@ -40,15 +41,17 @@ export default function Home() {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = () => {
-      if (dropdownOpen) setDropdownOpen(false)
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false)
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside)
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [dropdownOpen])
+  }, [])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f] font-['Roboto',sans-serif] overflow-auto scrollbar-hide">
@@ -71,15 +74,12 @@ export default function Home() {
             </p>
 
             {/* Version Selector Dropdown */}
-            <div className="mb-4">
+            <div className="mb-4" ref={dropdownRef}>
               <label className="block text-sm font-medium text-gray-400 mb-2">script ver</label>
               <div className="relative">
                 <div
                   className="flex items-center justify-between w-full bg-[#18191c] border border-[#2b2d31] hover:border-[rgb(72,138,182)] rounded-md py-2 px-3 text-white cursor-pointer transition-colors"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setDropdownOpen(!dropdownOpen)
-                  }}
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
                 >
                   <span>{scriptVersion}</span>
                   <ChevronDown
@@ -94,8 +94,7 @@ export default function Home() {
                       className={`px-3 py-2 cursor-pointer hover:bg-[#2b2d31] ${
                         scriptVersion === "full" ? "bg-[#2b2d31] text-[rgb(72,138,182)]" : "text-white"
                       }`}
-                      onClick={(e) => {
-                        e.stopPropagation()
+                      onClick={() => {
                         setScriptVersion("full")
                         setDropdownOpen(false)
                       }}
@@ -106,8 +105,7 @@ export default function Home() {
                       className={`px-3 py-2 cursor-pointer hover:bg-[#2b2d31] ${
                         scriptVersion === "lite" ? "bg-[#2b2d31] text-[rgb(72,138,182)]" : "text-white"
                       }`}
-                      onClick={(e) => {
-                        e.stopPropagation()
+                      onClick={() => {
                         setScriptVersion("lite")
                         setDropdownOpen(false)
                       }}
@@ -129,3 +127,4 @@ export default function Home() {
     </div>
   )
 }
+
