@@ -1,12 +1,13 @@
 import type React from "react"
+import type { Metadata } from "next"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "alternative",
-  description: "hi",
-  viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
-    generator: 'v0.dev'
+  description: "lego game script :3",
+  icons: {
+    icon: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({
@@ -16,15 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans">
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          {children}
-        </ThemeProvider>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
 
-
-
-import './globals.css'
