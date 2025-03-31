@@ -1,56 +1,54 @@
 "use client"
 
-import { useRef, useState } from "react"
-import hljs from "highlight.js"
-import "highlight.js/styles/atom-one-dark.css"
-import { Copy, Check } from "lucide-react"
+import { useState } from "react"
+import { Check, Copy } from "lucide-react"
 
 interface CodeBlockProps {
   code: string
   language?: string
+  showLineNumbers?: boolean
   className?: string
 }
 
-export function CodeBlock({ code, language = "lua", className = "" }: CodeBlockProps) {
+export function CodeBlock({ code, language = "lua", showLineNumbers = false, className = "" }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
-  const codeRef = useRef<HTMLElement>(null)
 
-  // Highlight the code
-  const highlightedCode = hljs.highlight(code, { language }).value
+  const copyCode = () => {
+    navigator.clipboard.writeText(code)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
-  const copyToClipboard = async () => {
-    if (codeRef.current) {
-      try {
-        await navigator.clipboard.writeText(code)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      } catch (err) {
-        console.error("Failed to copy text: ", err)
-      }
-    }
+  // For Lua syntax highlighting
+  const renderLuaCode = () => {
+    // Extract the version from the code
+    const version = code.includes("lite") ? "lite" : "full"
+
+    return (
+      <code className="language-lua text-white">
+        <span className="text-[#FF7B72]">loadstring</span>(<span className="text-[#A5D6FF]">game</span>:
+        <span className="text-[#D2A8FF]">HttpGet</span>(
+        <span className="text-[#79C0FF]">{`"https://alt-lol.vercel.app/api/script/${version}"`}</span>
+        ))()
+      </code>
+    )
   }
 
   return (
-    <div className={`relative rounded-md overflow-hidden ${className}`}>
-      <div className="flex items-center justify-between px-4 py-2 bg-[#18191c] border-b border-[#2b2d31]">
-        <span className="text-sm text-gray-400">{language}</span>
-      </div>
-      <div className="relative">
-        <pre className="bg-[#18191c] p-4 overflow-x-auto max-h-[120px]">
-          <code
-            ref={codeRef}
-            className={`language-${language} text-sm`}
-            dangerouslySetInnerHTML={{ __html: highlightedCode }}
-          />
+    <div className={`flex items-center gap-2 ${className}`}>
+      <div className="flex-grow rounded-lg bg-zinc-900/80 backdrop-blur-sm border border-zinc-800/60 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-zinc-700/60 overflow-x-auto h-10">
+        <pre className="h-full flex items-center px-3 text-sm font-mono overflow-x-auto whitespace-nowrap">
+          {language === "lua" ? renderLuaCode() : <code className="text-white">{code}</code>}
         </pre>
-        <button
-          onClick={copyToClipboard}
-          className="absolute top-2 right-2 flex items-center justify-center w-8 h-8 rounded-md bg-[#2b2d31] bg-opacity-70 text-gray-400 hover:text-white transition-colors"
-          aria-label="Copy code"
-        >
-          {copied ? <Check size={16} /> : <Copy size={16} />}
-        </button>
       </div>
+      <button
+        className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-zinc-400 hover:text-white bg-zinc-900/80 backdrop-blur-sm border border-zinc-800/60 hover:border-zinc-700/60 rounded-lg transition-colors"
+        onClick={copyCode}
+      >
+        {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+        <span className="sr-only">Copy code</span>
+      </button>
     </div>
   )
 }
+
