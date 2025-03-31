@@ -8,12 +8,8 @@ export async function GET(request: NextRequest) {
   // Return status information for the lite version
   return NextResponse.json(
     {
-      version: "lite",
-      status: "online",
-      timestamp: new Date().toISOString(),
-      features: ["Basic functionality", "Minimal UI", "Lower resource usage"],
-      token: sessionToken,
-      message: "Lite version is running and available",
+      version: "1",
+      status: "working",
     },
     {
       headers: {
