@@ -70,7 +70,7 @@ export default function Home() {
 
             <p className="text-gray-300 mb-6">
               web on for loadstring only. planning on adding web interface soon? (if web down temporary then use github
-              loadsting &lt;33)
+              loadstring &lt;33)
             </p>
 
             {/* Version Selector Dropdown */}
