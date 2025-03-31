@@ -8,12 +8,8 @@ export async function GET(request: NextRequest) {
   // Return status information for the full version
   return NextResponse.json(
     {
-      version: "full",
-      status: "online",
-      timestamp: new Date().toISOString(),
-      features: ["Advanced UI", "All features", "Performance optimizations", "Anti-tampering protection"],
-      token: sessionToken,
-      message: "Full version is running and available",
+      version: "0.1",
+      status: "working",
     },
     {
       headers: {
