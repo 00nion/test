@@ -45,7 +45,7 @@ export function CodeBlock({ code, language = "lua", showLineNumbers = false, cla
         className="flex-shrink-0 h-10 w-10 flex items-center justify-center text-zinc-400 hover:text-white bg-zinc-900/80 backdrop-blur-sm border border-zinc-800/60 hover:border-zinc-700/60 rounded-lg transition-colors"
         onClick={copyCode}
       >
-        {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-4 w-4 text-[rgb(72,138,182)]" /> : <Copy className="h-4 w-4" />}
         <span className="sr-only">Copy code</span>
       </button>
     </div>
