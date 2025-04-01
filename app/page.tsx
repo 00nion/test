@@ -69,9 +69,40 @@ export default function Home() {
             <h1 className="text-2xl font-bold text-white mb-4">web not availible</h1>
 
             <p className="text-gray-300 mb-6">
-              web on for loadstring only. planning on adding web interface soon? (if web down temporary then use github
-              loadstring &lt;33)
+              web on for loadstring only. planning on adding web interface soon? (if web down temporary then use{" "}
+              <a
+                href="https://github.com/00nion/alternative"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[rgb(72,138,182)] font-bold underline hover:text-[rgb(100,160,200)] transition-colors"
+              >
+                github
+              </a>{" "}
+              loadsting &lt;33)
             </p>
+
+            {/* Script on text */}
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-400 mb-2">script on</label>
+              <div className="flex space-x-4">
+                <a
+                  href="https://rscripts.net/script/alternative-3242"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[rgb(72,138,182)] font-bold underline hover:text-[rgb(100,160,200)] transition-colors"
+                >
+                  rscripts
+                </a>
+                <a
+                  href="https://scriptblox.com/script/Universal-Alternative-Script-Hub-6881"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[rgb(72,138,182)] font-bold underline hover:text-[rgb(100,160,200)] transition-colors"
+                >
+                  scriptblox
+                </a>
+              </div>
+            </div>
 
             {/* Version Selector Dropdown */}
             <div className="mb-4" ref={dropdownRef}>
@@ -84,36 +115,40 @@ export default function Home() {
                   <span>{scriptVersion}</span>
                   <ChevronDown
                     size={16}
-                    className={`text-gray-400 transition-transform duration-200 ${dropdownOpen ? "transform rotate-180" : ""}`}
+                    className={`text-gray-400 transition-transform duration-300 ${dropdownOpen ? "transform rotate-180" : ""}`}
                   />
                 </div>
 
-                {dropdownOpen && (
-                  <div className="absolute z-20 mt-1 w-full bg-[#18191c] border border-[#2b2d31] rounded-md shadow-lg">
-                    <div
-                      className={`px-3 py-2 cursor-pointer hover:bg-[#2b2d31] ${
-                        scriptVersion === "full" ? "bg-[#2b2d31] text-[rgb(72,138,182)]" : "text-white"
-                      }`}
-                      onClick={() => {
-                        setScriptVersion("full")
-                        setDropdownOpen(false)
-                      }}
-                    >
-                      full
-                    </div>
-                    <div
-                      className={`px-3 py-2 cursor-pointer hover:bg-[#2b2d31] ${
-                        scriptVersion === "lite" ? "bg-[#2b2d31] text-[rgb(72,138,182)]" : "text-white"
-                      }`}
-                      onClick={() => {
-                        setScriptVersion("lite")
-                        setDropdownOpen(false)
-                      }}
-                    >
-                      lite
-                    </div>
+                <div
+                  className={`absolute z-20 mt-1 w-full bg-[#18191c] border border-[#2b2d31] rounded-md shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+                    dropdownOpen
+                      ? "max-h-[100px] opacity-100 transform scale-y-100 origin-top"
+                      : "max-h-0 opacity-0 transform scale-y-95 origin-top pointer-events-none border-0"
+                  }`}
+                >
+                  <div
+                    className={`px-3 py-2 cursor-pointer hover:bg-[#2b2d31] ${
+                      scriptVersion === "full" ? "bg-[#2b2d31] text-[rgb(72,138,182)]" : "text-white"
+                    }`}
+                    onClick={() => {
+                      setScriptVersion("full")
+                      setDropdownOpen(false)
+                    }}
+                  >
+                    full
                   </div>
-                )}
+                  <div
+                    className={`px-3 py-2 cursor-pointer hover:bg-[#2b2d31] ${
+                      scriptVersion === "lite" ? "bg-[#2b2d31] text-[rgb(72,138,182)]" : "text-white"
+                    }`}
+                    onClick={() => {
+                      setScriptVersion("lite")
+                      setDropdownOpen(false)
+                    }}
+                  >
+                    lite
+                  </div>
+                </div>
               </div>
             </div>
 
